@@ -20,7 +20,7 @@ def admin_view_users():
 @admin.route('/adminviewmostplayer')
 def adminviewmostplayer():
     data={}
-    q="select * from user"
+    q="select * from music inner join history using (music_id)"
     data['res']=select(q)
     
     return render_template('adminviewmostplayer.html',data=data)

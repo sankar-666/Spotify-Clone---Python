@@ -2,25 +2,14 @@
 
 <center>
     <div class="img-div"></div>
-    <h3>View Users</h3>
+    <h3>View Most Player Song's</h3>
     <form action="" method="post">
-    <table class="table table-striped tbl-new bg-light shadow" style="max-width: 1200px;">
-        <tr>
-            <th>Index</th>
-            <th>Name</th>
-            <th>Place</th>
-            <th>Phone</th>
-            <th>Email</th>
-      
-
-        </tr>
+    <table class="table table-striped tbl-new bg-light shadow" style="max-width: 600px;">
+       
         {% for row in data['res'] %}
         <tr>
-            <td>{{ loop.index }}</td>
-            <td>{{ row['fname'] }}{{ row['lname'] }}</td>
-            <td>{{ row['place'] }}</td>
-            <td>{{ row['phone'] }}</td>
-            <td>{{ row['email'] }}</td>
+        
+            <td>Most played Music Till Now is <span style="margin: 2px 5px ;color: red;">{{ row['name'] }}</span></td>
 
            
 
