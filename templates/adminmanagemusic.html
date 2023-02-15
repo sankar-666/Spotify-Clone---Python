@@ -1,0 +1,152 @@
+{% include 'adminheader.html' %}
+<center>
+    <div class="img-div" style="padding: 100px 0px;">
+    {% if data['raw'] %}
+
+    
+    <h1 class="hd">Update Music</h1>
+    <form action="" method="post" class="form" enctype="multipart/form-data">
+        <table class="table form-group">
+            <tr>
+                <th>Name</th>
+                <td><input type="text" value="{{ data['raw'][0]['music'] }}" class="form-control" required name="name" id=""></td>
+            </tr>
+            <tr>
+                <th>Music</th>
+                <td><audio style="width: 18 0px;height: 40px;" src="/{{ data['raw'][0]['path'] }}" controls></audio></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="file" class="form-control" name="music" id=""></td>
+
+            </tr>
+            <tr>
+                <th>Lyrics</th>
+                <td><textarea name="lyrics" id=""  cols="30" rows="10"> {{ data['raw'][0]['lyrics'] }}</textarea></td>
+            </tr>
+            <tr>
+               
+                <td colspan="2" align="center"><input type="submit" class="btn btn-success" name="update" id=""></td>
+            </tr>
+            </table>
+            </form>
+    
+
+    {% else %}
+    
+    <h1 class="hd">Manage Music</h1>
+    <form action="" method="post" class="form" enctype="multipart/form-data">
+        <table class="table form-group">
+            <tr>
+                <th>Category</th>
+                <td><select name="cat" class="form-control" id="">
+                    {% for i in data['cat'] %}
+                    <option value="{{ i['category_id'] }}">{{ i['category'] }}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" class="form-control" required name="name" id=""></td>
+            </tr>
+            <tr>
+                <th>Music</th>
+                <td><input type="file" class="form-control" required name="music" id=""></td>
+            </tr>
+            <tr>
+                <th>Lyrics</th>
+                <td><textarea name="lyrics" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+    
+           
+            <tr>
+               
+                <td colspan="2" align="center"><input type="submit" class="btn btn-success" name="btn" id=""></td>
+            </tr>
+            </table>
+            </form>
+
+    {% endif %}
+</div>
+    <br><br>
+    {% if data['count'] >= 1 %}
+    <h5>View Music</h5>
+    <table class="table table-striped tbl-new" style="width: 1000px;">
+        <tr>
+            <th>index</th>
+            <th>Category</th>
+            <th>Music</th>
+            <th>Path</th>
+            <th>Lyrics</th>
+            
+        </tr>
+        {% for row in data['res'] %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ row['category'] }}</td>
+            <td>{{ row['music'] }}</td>
+            <td><audio src="/{{ row['path'] }}" controls></audio></td>
+            <td><textarea style="border: none !important;" disabled name="" id="" cols="30" rows="5">{{ row['lyrics'] }}</textarea></td>
+           
+            <td><a class="btn btn-info" href="?action=update&mid={{ row['music_id'] }}">Update</a></td>
+            <td><a class="btn btn-danger" onclick="return confirm('Are You Sure!')" href="?action=delete&mid={{ row['music_id'] }}">Delete</a></td>
+                   </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</center>
+
+<script src="
+https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+<script>
+    $(function() {
+        $("input[name='place']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+        $("input[name='lname']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+        // $("input[name='dob']").on('input', function(e) {
+        //     $(this).val($(this).val().replace(/[^0-9/]/g, ''));
+
+        // });
+        
+        $("input[name='phone']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9]/g, ''));
+            
+        });
+        $("input[name='pin']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9]/g, ''));
+            
+        });
+        $("input[name='email']").on('input', function(e) {
+              var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{1,}/.test(this.value);
+                if(!re) {
+                    $('#eerror').show();
+                } else {
+                    $('#eerror').hide();
+                }
+
+        });
+        $("input[name='address']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z0-9()/. ]/g, ''));
+
+        });
+        $("input[name='place']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+            
+        $("input[name='pwd']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9A-Za-z@/. ]/g, ''));
+            
+        });
+    });
+
+
+</script>
+
+{% include 'footer.html' %}
